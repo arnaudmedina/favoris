@@ -17,7 +17,7 @@
 
 <h3>Favoris</h3>
 <ul>
-<li>Favori 1</li>
+<li><a href="favoriForm.html">Favori 1</a></li>
 <li>Favori 2</li>
 <li>Favori 3</li>
 </ul>
