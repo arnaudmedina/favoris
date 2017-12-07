@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <title>Error page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+    <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
+    <meta charset="UTF-8"> 
+</head>
+<body>
+
+<div id="favori" class="tab-pane fade in active">
+	<form class="col-lg-10" action=" " method="post"
+		action="@{/favoriPost}">
+		
+		<fieldset>
+			<!-- Text input-->
+			<div class="form-group">
+				<div class="input-group">
+
+					<span class="input-group-addon">Nom&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<input type="text" name="Nom" id="nom" placeholder="Nom"
+						class="form-control" required="required">
+				</div>
+			</div>
+			
+			<!-- Text input-->
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-addon">Url</span> <input type="text"
+						name="url" id="url" placeholder="http://monadresse.com/index.html"
+						class="form-control" >
+				</div>
+			</div>
+			
+			<!-- Text input-->
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-addon">Url de l'image</span> <input type="text"
+						name="urlImage" id="urlImage" placeholder="http://monadresse.com/image.gif"
+						class="form-control">
+				</div>
+			</div>
+
+			<!-- Text input-->
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-addon">Date création</span> <input
+						id = "dateCreation" name="dateCreation" placeholder="27/11/2016" class="form-control"
+						type="date" >
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-addon">Catégorie</span>
+					<div class="dropdown">
+						<select 
+							class="form-control">
+							<option value="1" text="categorie 1">
+							</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			
+			 <textarea id="description" cols="25" rows="7"></textarea> 
+			
+			<!-- Button -->
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary" id="valider">
+					Enregistrer <span class="glyphicon glyphicon-ok"></span>
+				</button>
+
+				<a th:href="@{/}"><button type="button" class="btn btn-success">
+						Annuler <span class="glyphicon glyphicon-arrow-left"></span>
+					</button></a>
+
+				<button type="button" class="btn btn-success" id="btnBonneBoite">Une
+					bonne boîte ?</button>
+			</div>
+		</fieldset>
+	</form>
+	<div
+		th:replace="fragments/components :: modal(id='bonneBoite-modal', title='Quelques Bonnes boîtes')">
+	</div>
+</div>
+
+<script th:inline="javascript" type="text/javascript">
+// 	/* Fill in modal with content loaded with Ajax */
+	$(document).ready(function() {
+		$('#btnBonneBoite').on('click', function() {
+			
+			$.ajax({
+				url : "https://geo.api.gouv.fr/communes?codePostal=" + $('#codePostal').val(),
+			}).done(function(resultat) {
+				var codeInsee = resultat[0].code;
+				// Boulanger patissier 11574
+				var codeRome = "D1102";
+				var tabExperiences = [[${experiences}]];
+				codeRome = tabExperiences[0].metier.code;
+  				 
+				// alert("CodeRome = " + codeRome );
+ 				// alert("Url appelée : " + "mbrapi/getOffresParRomeCommune/" + codeRome + "/" + codeInsee);
+				$.ajax({
+					url : "mbrapi/getOffresParRomeCommune/" + codeRome + "/" + codeInsee,
+				}).done(function(resultatMbb) {
+					resultatMbbObjet = JSON.parse(resultatMbb);
+					var listeCompanies = resultatMbbObjet.companies;
+					/* alert("ListeCompanies : " + listeCompanies[0].name); */
+					var companies_count = resultatMbbObjet.companie_count;
+					/* alert("Companies Count : " + companies_count); */
+					var contenu = "<h2>Quelques bonnes boîtes :</h2>";
+					for (var i = 0; i < 10; i++) {
+						contenu += "<a target='_blank' href='" + listeCompanies[i].url + "'>" + listeCompanies[i].name + "</a>";
+						contenu += " ,  " + listeCompanies[i].city + "<br>";
+					}
+					//alert(JSON.stringify(resultatMbb));
+					contenu = "<div style='color :black;'>" + contenu + "</div>";
+					$("#bonneBoite-modal").modal();
+					$("#bonneBoite-modal-body").text("");
+					$("#bonneBoite-modal-body").append(contenu);
+				});
+			});
+		});
+	});
+</script>
+
+</body>
+</html>
