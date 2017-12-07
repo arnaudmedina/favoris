@@ -11,4 +11,8 @@ On utilisera du java pour le côté BACK
 
 Pour le coté FRONT : 
 - html
-- jquery / ajax
+- javascript / jquery / ajax
+
+Côté SERVEUR
+- Tomcat pour l'application
+- PostgreSql pour la Base de données
