@@ -5,12 +5,15 @@
 Le projet permet de gérer des urls favoris
 
 La page d'accueil proposera les favoris avec notion de catégorie,
+
 ![](https://framapic.org/hWQtGatF5Hjc/1zu8lLsTUYdq)
 
 Un formulaire permettra de modifier / créer  un favori
 - nom
 - url
 - urlImage (lien vers une image symbolisant le favori)
+- catégorie
+- date de création
 - texte de description
 
 ![](https://framapic.org/TnpvoGscXld1/BiXsgxIaF88G)
