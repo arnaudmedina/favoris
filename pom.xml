@@ -7,33 +7,112 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>favoris Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-			<properties>
-			<slf4jVersion>1.6.1</slf4jVersion>
-		</properties>
+	<properties>
+		<slf4jVersion>1.6.1</slf4jVersion>
+	</properties>
 	<dependencies>
+		<!-- Dépendance junit pour les tests -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- Fin dépendance junit pour les tests -->
 
+		<!-- - Extensions java -->
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 			<version>7.0</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- - Extensions java -->
 
-
+		<!-- Dépendances sl4j locback -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4jVersion}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		<!-- Fin dépendances sl4j locback -->
+
+		<!-- Dépendances JaxRs et Jersey pour les services REST -->
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet</artifactId>
+			<version>2.25</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+			<version>2.25</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.jersey.ext.cdi</groupId>
+			<artifactId>jersey-cdi1x-servlet</artifactId>
+			<version>2.25</version>
+		</dependency>
+
+		<!-- Fin Dépendances JaxRs et Jersey pour les services REST -->
+
+
+		<!-- JBoss pour les serveurs TomCat ou Jetty -->
+		<dependency>
+			<groupId>org.jboss.weld.servlet</groupId>
+			<artifactId>weld-servlet</artifactId>
+			<version>2.4.5.Final</version>
+		</dependency>
+		<!-- JBoss pour les serveurs TomCat ou Jetty -->
+
+
+		<!-- Dépendances PostgreSql -->
+		<!-- <dependency> <groupId>org.hsqldb</groupId> <artifactId>hsqldb</artifactId> 
+			</dependency> -->
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.4.1211</version><!--$NO-MVN-MAN-VER$ -->
+		</dependency>
+		<!-- Fin Dépendances PostgreSql -->
+
+		<!-- Validation -->
+		<!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-validator</artifactId> 
+			</dependency> -->
+
 	</dependencies>
 	<build>
 		<finalName>favoris</finalName>
+
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.2</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat8-maven-plugin</artifactId>
+				<version>3.0-r1655215</version>
+				<configuration>
+					<contextFile>src/main/webapp/META-INF/context.xml</contextFile>
+					<systemProperties>
+						<base.db.jdbc.url>jdbc:postgresql://localhost/favoris</base.db.jdbc.url>
+					</systemProperties>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>

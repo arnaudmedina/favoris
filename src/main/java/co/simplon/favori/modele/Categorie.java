@@ -1,13 +1,14 @@
+package co.simplon.favori.modele;
 
 import java.util.List;
 
 public class Categorie {
 
-	private String nom;
-	private String description;
+    private String nom;
+    private String description;
 	private List<Favori> listeDeFavoris;
 	
-	public Categorie() {
+    public Categorie() {
 		super();
 		this.nom = "";
 	}
@@ -37,7 +38,8 @@ public class Categorie {
 	}
 	
 	public void ajouteFavori(Favori unFavori) {
-		if (unFavori != null)
+		if (unFavori != null){
 			this.listeDeFavoris.add(unFavori);
+		}
 	}
 }
