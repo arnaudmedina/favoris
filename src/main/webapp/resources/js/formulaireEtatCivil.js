@@ -54,8 +54,6 @@ function changeListenerEtatCivil(event, firstCall) {
 
 //Callback qui me permet de déterminer que le document est censé être chargé donc utilisable
 $(function() {
-	// Ici j'attends que le document me dise qu'il est complétement chargé
-	if ('complete' === document.readyState) {
 		/**
 		 * Ici je parcours tous mes champsEtatCivil les uns après les autres sans avoir besoin de recopier x fois le même code
 		 * Moins de code dupliqué
@@ -68,5 +66,4 @@ $(function() {
 			inputTmp.addEventListener('change', changeListenerEtatCivil);
 			changeListenerEtatCivil.call(inputTmp, undefined, true);
 		}
-	}
 });
