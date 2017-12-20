@@ -14,10 +14,11 @@ function changeListenerFormation(event, firstCall) {
 	// debugger ;
 	if (this.id=="annee")
 	{
-		if ((this.value >1900) &&(this.value <2030))
+		if ((this.value >1900) &&(this.value <2030)) {
 			valeursControleFormation[this.id] = true;
-		else
+		} else {
 			valeursControleFormation[this.id] = false;
+		}
 	}
 	if (this.id=="ecole")
 	{
