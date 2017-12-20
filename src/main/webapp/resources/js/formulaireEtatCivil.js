@@ -53,7 +53,7 @@ function changeListenerEtatCivil(event, firstCall) {
 }
 
 //Callback qui me permet de déterminer que le document est censé être chargé donc utilisable
-document.onreadystatechange = function () {
+$(function() {
 	// Ici j'attends que le document me dise qu'il est complétement chargé
 	if ('complete' === document.readyState) {
 		/**
@@ -69,4 +69,4 @@ document.onreadystatechange = function () {
 			changeListenerEtatCivil.call(inputTmp, undefined, true);
 		}
 	}
-};
+});
