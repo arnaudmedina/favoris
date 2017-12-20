@@ -15,14 +15,13 @@ champsControleExperience = ['nom', 'dateDebut','dateFin'];
 function changeListenerExperience(event, firstCall) {
 	if ("nom" == this.id ) {
 		var re =/^([a-z]+(( |')[a-z]+)*)+([-]([a-z]+(( |')[a-z]+)*)+)*$/iu;
-	};
+	}
 	
 	if ("dateDebut" == this.id ) {
 	   var re='/^([0-9]{2})/([0-9]{2})/([0-9]{4})$/';
 	}
 	if ("dateFin" == this.id ) {
-	var re='/^([0-9]{2})/([0-9]{2})/([0-9]{4})$/';
-	;
+	   var re='/^([0-9]{2})/([0-9]{2})/([0-9]{4})$/';
 	}
 	var OK = re.exec(this.value);
 	if (!OK) { 
